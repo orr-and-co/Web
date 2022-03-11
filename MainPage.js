@@ -1,11 +1,40 @@
 
-interests = ["Llandaff North", "Homelessness", "Knife Crime"]
+interestsArray = ["Llandaff North", "Homelessness", "Knife Crime"]
+
+function changeInterest(interest){
+    if (interestsArray.includes(interest)){
+        for (let i=0; i<interestsArray.length;i++){
+            if (interestsArray[i]==interest){
+                interestsArray[i]="";
+                
+                // If the array is now empty, replace it with []
+                empty = true;
+                for (let j=0; j<interestsArray.length;j++){
+                    if (interestsArray[j]!=""){
+                        empty = false;
+                    }
+                }
+                if (empty){
+                    interestsArray = [];
+                }
+            }
+        }
+
+    } else {
+        interestsArray.push(interest)
+    }
+    console.log(interestsArray)
+
+    document.getElementById("examplePost").outerHTML="<div class='post', id='examplePost'></div>"
+    loadPosts();
+}
 
 function openPage(url){
     window.open(url,'_self')
 }
 
 function outputPost(image, video, title, text){
+    
     myTemp = document.getElementById('myTemplate');
     normalContent = document.getElementById('examplePost');
 
@@ -18,12 +47,13 @@ function outputPost(image, video, title, text){
     // Add video
     if (video!=null){
         normalContent.appendChild(video);
-    } else {
+    } else if (image!=null) {
         normalContent.appendChild(image);
     }
     
     newContent = document.importNode(item, true);
-    newContent.textContent += text;
+    newContent.innerHTML += text + "<br /><br />";
+
     normalContent.appendChild(newContent);
 }
 
@@ -64,26 +94,31 @@ function loadPosts(){
 
     videoArray = [darkWaves, null]
 
-    tagsArray = [["Cardiff", "Llandaff North", "Environment"], ["Cardiff","Homelessness"]]
+    tagsArray = [["Cardiff", "Mental Health","Knife Crime"],["Homelessness"]]
 
     // For each post, output the post with the new content
+    var somethingsBeenPosted = false;
     for (let i=0; i<textArray.length; i++){
         // check to see if the post is filtered or not
-        var interested = true;
-        if (interests.length == 0){
+        var interested = false;
+        if (interestsArray.length == 0){
             interested = true;
         } else {
             for (let j=0; j<tagsArray[i].length; j++){
                 curr = tagsArray[i][j];
-                if (curr in interests){
+                if (interestsArray.includes(curr)){
                     interested = true;
                 }
             }
         }
         if (interested){
             outputPost(imageArray[i], videoArray[i], titleArray[i], textArray[i]);
+            somethingsBeenPosted=true
         }
         
+    }
+    if (somethingsBeenPosted==false){
+        outputPost(null, null, "Nothing here", "Sorry we couldn't find any posts related to your interests");
     }
  
 

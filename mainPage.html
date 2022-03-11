@@ -10,8 +10,16 @@
     <div class="post", id='examplePost'>
     </div>
 
+    <div class="interestMenu">
+        <button onclick="changeInterest('Cardiff')" style="width:100px">Cardiff</button><br />
+        <button onclick="changeInterest('Llandaff North')" style="width:100px">Llandaff North</button><br />
+        <button onclick="changeInterest('Heath')" style="width:100px">Heath</button><br />
+        <button onclick="changeInterest('Environment')" style="width:100px">Environment</button><br />
+        <button onclick="changeInterest('Homelessness')" style="width:100px">Homelessness</button><br />
+        <button onclick="changeInterest('Knife Crime')" style="width:100px">Knife Crime</button><br />
+    </div>
     <template id='myTemplate'>
-        <div class='templatePost'></div>
+        <div class='templatePost' id="templatePost"></div>
     </template>
     
     <script>
