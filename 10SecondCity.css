@@ -1,0 +1,13 @@
+#myTemplate {
+    outline: rgba(0, 0, 0, 0) solid 10px;
+    background-color: blueviolet;
+    width: 1000px;
+}
+
+#examplePost {
+    border-style: solid;
+    border-color: crimson;
+    background-color: rgb(43, 198, 226);
+    width: 1000px;
+    ;
+}
