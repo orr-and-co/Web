@@ -1,41 +1,5 @@
 <head>
-    <style>
-        #login_form{
-            position: absolute;
-            width: 40%;
-            height: 40%;
-            border-style: solid;
-            border-width: 1px;
-            border-color: black;
-            left: 30%;
-            top: 30%;
-            background-color: gainsboro;
-        }
-        #email_input{
-            position: relative;
-            box-sizing: content-box;
-            width: 75%;
-            height: 12.5%;
-            font-size: large;
-            display: block;
-            margin: 0 auto;
-            margin-top: 60px;
-            margin-bottom: 10px;
-        }
-        #password_input{
-            box-sizing: content-box;
-            width: 75%;
-            height: 12.5%;
-            font-size: large;
-            display: block;
-            margin: 0 auto;
-        }
-        #login_button{
-            display: block;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="loginPage.css">
 </head>
 
 <body>
@@ -49,7 +13,18 @@
     <script type="text/javascript">
         $("#login_form").on("submit", function(event){
           event.preventDefault();
-          console.log($(this).serializeArray());
+          var form_inputs = $("#login_form").serializeArray();
+
+          var email = form_inputs[0].value
+          var password = form_inputs[1].value
+
+          var request = new XMLHttpRequest()
+
+          request.open('GET', 'https://cardiff.jellypro.xyz/api', true)
+
+          request.onload = function(){
+            
+          }
         });
     </script>
 </body>

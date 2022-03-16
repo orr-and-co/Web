@@ -1,0 +1,35 @@
+#login_form{
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    left: 30%;
+    top: 30%;
+    background-color: gainsboro;
+}
+#email_input{
+    position: relative;
+    box-sizing: content-box;
+    width: 75%;
+    height: 12.5%;
+    font-size: large;
+    display: block;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 10px;
+}
+#password_input{
+    box-sizing: content-box;
+    width: 75%;
+    height: 12.5%;
+    font-size: large;
+    display: block;
+    margin: 0 auto;
+}
+#login_button{
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+}
