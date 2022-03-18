@@ -1,24 +1,31 @@
 <head>
     <link rel="stylesheet" type="text/css" href="10SecondCity.css" media="screen" />
     <script src="MainPage.js"></script>
+    <title>10 Second City</title>
 </head>
 
 <body>
-    <div, id="titleBar">
-        <button onclick="openPage('loginPage.html')">Login</button>
-    </div>
-    <div class="post", id='examplePost'>
+    <header>
+        <div, id="titleBar">
+            <button onclick="openPage('loginPage.html')">Login</button>
+            <button onclick="openPage('mainPage.html')">Home</button>
+            <button onclick="openPage('createPost.html')">New Post</button>
+        </div>
+    </header>
+
+    <div class="interestMenu" style="float: left; height:100%">
+        <button id='i1' onclick="changeInterest('Cardiff', 'i1')" style="width:100px; background-color: red;">Cardiff</button><br />
+        <button id='i2' onclick="changeInterest('Llandaff North', 'i2')" style="width:100px; background-color: red;">Llandaff North</button><br />
+        <button id='i3' onclick="changeInterest('Heath', 'i3')" style="width:100px; background-color: red;">Heath</button><br />
+        <button id='i4' onclick="changeInterest('Environment', 'i4' )" style="width:100px; background-color: red;">Environment</button><br />
+        <button id='i5' onclick="changeInterest('Homelessness', 'i5')" style="width:100px; background-color: red;">Homelessness</button><br />
+        <button id='i6' onclick="changeInterest('Knife Crime', 'i6')" style="width:100px; background-color: red;">Knife Crime</button><br />
     </div>
 
-    <div class="interestMenu">
-        <button onclick="changeInterest('Cardiff')" style="width:100px">Cardiff</button><br />
-        <button onclick="changeInterest('Llandaff North')" style="width:100px">Llandaff North</button><br />
-        <button onclick="changeInterest('Heath')" style="width:100px">Heath</button><br />
-        <button onclick="changeInterest('Environment')" style="width:100px">Environment</button><br />
-        <button onclick="changeInterest('Homelessness')" style="width:100px">Homelessness</button><br />
-        <button onclick="changeInterest('Knife Crime')" style="width:100px">Knife Crime</button><br />
+    <div class="post", id='examplePost' style="float: left">
     </div>
-    <template id='myTemplate'>
+
+    <template id='myTemplate' width="500px">
         <div class='templatePost' id="templatePost"></div>
     </template>
     
