@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="manageUsers.css">
+    </head>
     <body>
         <div id="create_user">
-            <form>
-                <label for="email">Enter email for new user.</label>
-                <input type="email">
-                <label for="password">Enter starting password for new user.</label>
-                <input type="password">
+            <form id="create_form">
+                <input id="email_input" type="email" placeholder="Enter email of new user...">
+                <input id="password_input" type="password" placeholder="Enter initial password for new user...">
+                <input id="create_button" type="submit" value="Create User">
             </form>
         </div>
         <div id="remove_user">
-            <form>
-                <label for="email">Enter email of user to remove.</label>
-                <input type="email">
+            <form id="remove_form">
+                <input id="email_input" type="email" placeholder="Enter email of user to remove...">
+                <input id="remove_button" type="submit" value="Remove User">
             </form>
         </div>
     </body>
