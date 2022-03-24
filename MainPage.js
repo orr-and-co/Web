@@ -126,9 +126,7 @@ function loadPosts(){
 
 function loadImageInput(){
     seeFile = document.getElementById('fInput');
-    console.log(seeFile.files[0])
 
-    console.log(seeFile.files[0].type)
     if (seeFile.files[0].type=="video/mp4"){
          newMedia = document.createElement("VIDEO")
          newMedia.setAttribute("width", 500)
@@ -142,4 +140,28 @@ function loadImageInput(){
     displayer = document.getElementById('ImageVideo Displayer')
     document.getElementById('ImageVideo Displayer').outerHTML="<div id='ImageVideo Displayer'></div>"
     document.getElementById('ImageVideo Displayer').appendChild(newMedia)
+}
+
+function grabData(){
+    titleInput = document.getElementById("TitleInput")
+    textInput = document.getElementById("TextInput")
+
+    cbCardiff = document.getElementById("cbCardiff")
+    cbLlandaffNorth = document.getElementById("cbLlandaffNorth")
+    cbHeath = document.getElementById("cbHeath")
+    cbMentalHealth = document.getElementById("cbMentalHealth")
+    cbEnvironment = document.getElementById("cbEnvironment")
+    cbHomelessness = document.getElementById("cbHomelessness")
+    cbKnifeCrime = document.getElementById("cbKnifeCrime")
+    cbList = [cbCardiff,cbLlandaffNorth,cbHeath,cbMentalHealth,cbEnvironment,cbHomelessness,cbKnifeCrime]
+
+    // Clear all inputs
+    titleInput.value=""
+    textInput.value=""
+
+    for (let i=0; i<cbList.length;i++){
+        cbList[i].checked = false
+    }
+    document.getElementById("ImageVideo Displayer").outerHTML="<div id='ImageVideo Displayer'></div>"
+    
 }
