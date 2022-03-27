@@ -13,14 +13,7 @@
         </div>
     </header>
 
-    <div class="interestMenu" style="float: left; height:100%">
-        <button id='i1' onclick="changeInterest('Cardiff', 'i1')" style="width:100px; background-color: red;">Cardiff</button><br />
-        <button id='i2' onclick="changeInterest('Llandaff North', 'i2')" style="width:100px; background-color: red;">Llandaff North</button><br />
-        <button id='i3' onclick="changeInterest('Heath', 'i3')" style="width:100px; background-color: red;">Heath</button><br />
-        <button id='i4' onclick="changeInterest('Environment', 'i4' )" style="width:100px; background-color: red;">Environment</button><br />
-        <button id='i5' onclick="changeInterest('Homelessness', 'i5')" style="width:100px; background-color: red;">Homelessness</button><br />
-        <button id='i6' onclick="changeInterest('Knife Crime', 'i6')" style="width:100px; background-color: red;">Knife Crime</button><br />
-    </div>
+    <div id="interestMenu" style="float: left; height:100%"></div>
 
     <div class="post", id='examplePost' style="float: left">
     </div>
@@ -31,6 +24,7 @@
     
     <script>
         loadPosts();
+        interestButtons();
     </script>
 
 

@@ -10,3 +10,8 @@
     background-color: rgb(43, 198, 226);
     width: 500px;
 }
+
+.interestButton {
+    width:100px; 
+    background-color: red
+}

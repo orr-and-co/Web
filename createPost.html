@@ -22,24 +22,12 @@
         <label>Video / Image</label>
         <br \>
         <input type="file" id="fInput" mouseup="console.log('Mouseup')">
-        <div id="ImageVideo Displayer"></div>
-
         <button onclick="loadImageInput()">Load Media</button><br />
-
-        <input type="checkbox" id="cbCardiff">
-        <label>Cardiff</label>
-        <input type="checkbox" id="cbLlandaffNorth">
-        <label>Llandaff North</label>
-        <input type="checkbox" id="cbHeath">
-        <label>Heath</label><br />
-        <input type="checkbox" id="cbMentalHealth">
-        <label>Mental Health</label>
-        <input type="checkbox" id="cbEnvironment">
-        <label>Environment</label>
-        <input type="checkbox" id="cbHomelessness">
-        <label>Homelessness</label>
-        <input type="checkbox" id="cbKnifeCrime">
-        <label>Knife Crime</label>
-
+        <div id="ImageVideo Displayer"></div>
+        <h2>Interests</h2>
+        <script>addInterests()</script>
+        <br /><br />
         <button onclick="grabData()">Save Post</button>
     </div>
+
+    
