@@ -1,5 +1,54 @@
 
 interestsArray = []
+allInterests = [
+    "Cultural Events",
+    "Crime",
+    "Education",
+    "Environment",
+    "Health & Fitness",
+    "Homelessness",
+    "Human Rights",
+    "Local Campaigns",
+    "Mental Health",
+    "Adamsdown",
+    "Caerau",
+    "Canton & Pontcanna",
+    "Cathays & City Centre",
+    "Creigiau",
+    "Ely East",
+    "Ely West",
+    "Fairwater & St Fagans",
+    "Gabalfa",
+    "Grangetown",
+    "Gwaelod y Garth",
+    "Heath & Birchgrove",
+    "Leckwith",
+    "Lisvane",
+    "Llandaff & Llandaff North",
+    "Llanedyrn & Cyncoed",
+    "Llanishen",
+    "Lower Llanrumney",
+    "Maindy",
+    "Morganstown & Radyr",
+    "Mynachdy",
+    "North Butetown",
+    "Pentrebane",
+    "Pentwyn & Pontprennau",
+    "Pentyrch",
+    "Plasnewydd",
+    "Plott",
+    "Rhiwbina",
+    "Riverside",
+    "Roath & Penylan",
+    "Rumney",
+    "South Butetown & Cardiff Bay",
+    "St Mellons & Old St Mellons",
+    "Tongwynlais",
+    "Tremorfa & Pengam Green",
+    "Trowbridge",
+    "Upper Llanrumney",
+    "Whitchurch"
+    ]
 
 function changeInterest(interest, buttonId){
     if (interestsArray.includes(interest)){
@@ -37,6 +86,51 @@ function changeInterest(interest, buttonId){
 
 function openPage(url){
     window.open(url,'_self')
+}
+
+function interestButtons(){
+    interestMenu = document.getElementById("interestMenu")
+    for (let i=0; i<allInterests.length;i++){
+        button = document.createElement('button');       
+
+        button.innerText = allInterests[i]
+
+        button.id = allInterests[i]
+        button.className = "interestButton"
+
+        button.addEventListener('click', () => {
+            changeInterest(allInterests[i],allInterests[i])
+        })
+
+        interestMenu.appendChild(button)
+        interestMenu.appendChild(document.createElement('br'))
+        if (i==8){
+            interestMenu.appendChild(document.createElement('br'))
+        }
+    }
+}
+
+function addInterests(){
+    menu = document.getElementById("examplePost")
+    
+    for (let i=0; i<allInterests.length;i++){
+        checkbox = document.createElement('input');
+        checkbox.id = allInterests[i];
+        checkbox.type = 'checkbox';
+
+        label = document.createElement('label');
+        label.innerText = allInterests[i];
+        menu.append(checkbox)
+        menu.append(label)
+
+        if ((i+1)%4==0){
+            menu.append(document.createElement('br'))
+        }
+        if (i==8){
+            menu.append(document.createElement('br'))
+            menu.append(document.createElement('br'))
+        }
+    }
 }
 
 function outputPost(image, video, title, text){
@@ -95,7 +189,7 @@ function loadPosts(){
 
     videoArray = [darkWaves, null]
 
-    tagsArray = [["Llandaff North","Environment"],["Homelessness"]]
+    tagsArray = [["Llandaff & Llandaff North","Environment"],["Homelessness"]]
 
     // For each post, output the post with the new content
     var somethingsBeenPosted = false;
@@ -146,21 +240,12 @@ function grabData(){
     titleInput = document.getElementById("TitleInput")
     textInput = document.getElementById("TextInput")
 
-    cbCardiff = document.getElementById("cbCardiff")
-    cbLlandaffNorth = document.getElementById("cbLlandaffNorth")
-    cbHeath = document.getElementById("cbHeath")
-    cbMentalHealth = document.getElementById("cbMentalHealth")
-    cbEnvironment = document.getElementById("cbEnvironment")
-    cbHomelessness = document.getElementById("cbHomelessness")
-    cbKnifeCrime = document.getElementById("cbKnifeCrime")
-    cbList = [cbCardiff,cbLlandaffNorth,cbHeath,cbMentalHealth,cbEnvironment,cbHomelessness,cbKnifeCrime]
-
     // Clear all inputs
     titleInput.value=""
     textInput.value=""
 
-    for (let i=0; i<cbList.length;i++){
-        cbList[i].checked = false
+    for(let i=0; i<allInterests.length;i++){
+        document.getElementById(allInterests[i]).checked=false
     }
     document.getElementById("ImageVideo Displayer").outerHTML="<div id='ImageVideo Displayer'></div>"
     
