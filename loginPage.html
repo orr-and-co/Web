@@ -11,21 +11,36 @@
     </form>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script type="text/javascript">
+    <script>
+        
+    </script>
+    <script type="text/javascript">
         $("#login_form").on("submit", function(event){
           event.preventDefault();
+          // Store the form inputs into an array.
           var form_inputs = $("#login_form").serializeArray();
 
-          var email = form_inputs[0].value
-          var password = form_inputs[1].value
+          // Store the email and password in their own variables.
+          var email = form_inputs[0].value;
+          var password = form_inputs[1].value;
 
-          var request = new XMLHttpRequest()
+          // Base domain path.
+          var domain_path = 'https://cardiff.jellypro.xyz';
 
-          request.open('GET', 'https://cardiff.jellypro.xyz/api', true)
+          var email_password = email + ':' + password;
 
-          request.onload = function(){
-            
-          }
+          // Encode email:password string in base64.
+          var email_password_encoded = btoa(email_password);
+
+          fetch(domain_path + '/api/v1/tokens/', {
+              method: 'GET',
+              headers: {
+                'Authorization' : 'Basic ' + email_password_encoded
+              }
+          })
+          .then((response) => {
+              console.log(response);
+          })
         });
     </script> -->
 </body>
