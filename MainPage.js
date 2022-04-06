@@ -1,4 +1,5 @@
-
+const backendLink = "https://cardiff.jellypro.xyz/api/v1"
+const authorisation = "Basic YWJjQHBtLm1lOlgmZShbSVM7VkoneEtNZV8="
 interestsArray = []
 allInterests = [
     "Cultural Events",
@@ -50,6 +51,7 @@ allInterests = [
     "Whitchurch"
     ]
 
+
 function changeInterest(interest, buttonId){
     if (interestsArray.includes(interest)){
         for (let i=0; i<interestsArray.length;i++){
@@ -72,6 +74,7 @@ function changeInterest(interest, buttonId){
     } else {
         interestsArray.push(interest)
     }
+    
     thisButton = document.getElementById(buttonId)
     if (thisButton.style.backgroundColor == "greenyellow"){
         thisButton.style.backgroundColor = "red"
@@ -81,7 +84,9 @@ function changeInterest(interest, buttonId){
     
 
     document.getElementById("examplePost").outerHTML="<div class='post' id='examplePost' style='float: left'></div>"
-    loadPosts();
+    //loadPosts()
+    prepAPIPostLoad()
+
 }
 
 function openPage(url){
@@ -133,29 +138,119 @@ function addInterests(){
     }
 }
 
-function outputPost(image, video, title, text){
-    
-    myTemp = document.getElementById('myTemplate');
-    normalContent = document.getElementById('examplePost');
+function outputPost(image, video, title, text, thisPostInterests){
+    showPost = false
 
-    item = myTemp.content.querySelector("div");
+    console.log(image)
+    console.log(video)
+    if (thisPostInterests != undefined){
+        for (let i=0; i<thisPostInterests.length;i++){
+            interest = thisPostInterests[i]
+            thisPostInterests[i] = interest.charAt(0).toUpperCase() + interest.slice(1)
+        }
 
-    postTitle = document.createElement("h2")
-    postTitle.textContent = title
-    normalContent.appendChild(postTitle);
+        if (interestsArray.length==0){
+            showPost=true
+        } else {
+            
+            for (let i=0; i<thisPostInterests.length; i++){
+                curr = thisPostInterests[i]
 
-    // Add video
-    if (video!=null){
-        normalContent.appendChild(video);
-    } else if (image!=null) {
-        normalContent.appendChild(image);
+                if (interestsArray.includes(curr)){
+                    showPost = true;
+                }
+            }
+        }
+        
+        if (showPost==true){
+            myTemp = document.getElementById('myTemplate');
+            normalContent = document.getElementById('examplePost');
+
+            item = myTemp.content.querySelector("div");
+
+            postTitle = document.createElement("h2")
+            postTitle.textContent = title
+            normalContent.appendChild(postTitle);
+
+            // Add video
+            if (video!=null){
+                video.setAttribute("width",200)
+                video.controls = true
+                normalContent.appendChild(video);
+            } else if (image!=null) {
+                myImg = document.createElement("img")
+                myImg.src="data:image/png;base64," + image
+                myImg.setAttribute("width", 200)
+                //image.setAttribute("width", 500)
+                //normalContent.appendChild(image)
+                normalContent.appendChild(myImg)
+            }
+            
+            newContent = document.importNode(item, true);
+            newContent.textAlign = "center"
+            newContent.innerHTML += text + "<br /><br />";
+
+            normalContent.appendChild(newContent);
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    fetch(backendLink + '/posts/all/', {headers : {'authorization': authorisation}})
+        .then((response) => {return response.json()})
+        .then(loadPostsFromAPI)
+    })
+
+function prepAPIPostLoad(){fetch(backendLink + '/posts/all/', {headers : {'authorization': authorisation}})
+    .then((response) => {return response.json()})
+    .then(loadPostsFromAPI)
+}
+
+function loadPostsFromAPI(data){
+
+    // get more info on first post ***** MAKE IT SO THAT IT LOOPS FOR ALL POSTS NOT 100 POSTS
+    for (let i=0; i<1000;i++){
+        fetch(backendLink + '/posts/' + data[i]['id'] + '/')
+            .then((response) => {return response.json()})
+            .then((data) => {
+                console.log(data.preview)
+                if (data.preview != null){
+                    outputPost(data.preview,null,data.title,data.content, data.interests)
+                    /*if (data.preview.canPlayType("video/mp4")){
+                        outputPost(null,data.preview,data.title,data.content, data.interests)
+                    } else {
+                        
+                    }*/
+                } else {
+                    outputPost(null,null, data.title,data.content, data.interests)
+                }
+            })
     }
     
-    newContent = document.importNode(item, true);
-    newContent.textAlign = "center"
-    newContent.innerHTML += text + "<br /><br />";
+}
 
-    normalContent.appendChild(newContent);
+function savePostsToAPI(title, text, interests, media){
+    fetch(backendLink + '/posts/', {
+        "method":"POST",
+        headers: {
+            "authorization":authorisation,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "title": title,
+            "short_content": "",
+            "content": text,
+            "link": "",
+            "preview_image": null,
+            "binary_content": null,
+            "interests": interests,
+            "publish_at": 16000000
+        })
+    })
+    .then((response) => {return response.json()})
+    .then((data) => {
+
+    })
 }
 
 function loadPosts(){
@@ -207,7 +302,7 @@ function loadPosts(){
             }
         }
         if (interested){
-            outputPost(imageArray[i], videoArray[i], titleArray[i], textArray[i]);
+            outputPost(imageArray[i], videoArray[i], titleArray[i], textArray[i], tagsArray[i]);
             somethingsBeenPosted=true
         }
         
@@ -237,9 +332,19 @@ function loadImageInput(){
 }
 
 function grabData(){
+
     titleInput = document.getElementById("TitleInput")
     textInput = document.getElementById("TextInput")
 
+    newInterests = []
+    for (let i=0; i<allInterests.length;i++){
+        if (document.getElementById(allInterests[i]).checked==true){
+            newInterests = newInterests.concat(allInterests[i])
+        }
+    }
+ 
+    // ***** send media to the API to be saved with the post
+    savePostsToAPI(titleInput.value, textInput.value, newInterests, null)
     // Clear all inputs
     titleInput.value=""
     textInput.value=""
@@ -247,6 +352,7 @@ function grabData(){
     for(let i=0; i<allInterests.length;i++){
         document.getElementById(allInterests[i]).checked=false
     }
+    
     document.getElementById("ImageVideo Displayer").outerHTML="<div id='ImageVideo Displayer'></div>"
     
 }
