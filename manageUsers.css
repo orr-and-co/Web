@@ -20,7 +20,16 @@
     bottom: 10%;
     background-color: gainsboro;
 }
-#email_input{
+#email_input_create{
+    position: relative;
+    box-sizing: content-box;
+    width: 75%;
+    height: 12.5%;
+    font-size: large;
+    display: block;
+    margin: 0 auto;
+}
+#email_input_remove{
     position: relative;
     box-sizing: content-box;
     width: 75%;
@@ -31,13 +40,16 @@
     margin-top: 60px;
     margin-bottom: 10px;
 }
-#password_input{
+#name_input{
+    position: relative;
     box-sizing: content-box;
     width: 75%;
     height: 12.5%;
     font-size: large;
     display: block;
     margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 10px;
 }
 #remove_button,
 #create_button{
