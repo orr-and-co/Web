@@ -1,0 +1,33 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="10SecondCity.css" media="screen" />
+    <script src="MainPage.js"></script>
+    <title>10 Second City</title>
+</head>
+
+<body>
+    <div, id="titleBar">
+        <button onclick="openPage('loginPage.html')">Login</button>
+        <button onclick="openPage('mainPage.html')">Home</button>
+        <button onclick="openPage('createPost.html')">New Post</button>
+    </div>
+    <div class="post", id='examplePost'>
+        <label>Title:</label>
+        <br \>
+        <textarea name="TitleInput" rows="1" id="TitleInput"></textarea>
+        <br \>
+        <label>Main text</label>
+        <br \>
+        <textarea name="TextInput" rows="4" cols="50" id="TextInput"></textarea>
+        <br \>
+        <label>Video / Image</label>
+        <br \>
+        <input type="file" id="fInput" mouseup="console.log('Mouseup')">
+        <button onclick="loadImageInput()">Load Media</button><br />
+        <div id="ImageVideo Displayer"></div>
+        <h2>Interests</h2>
+        <script>addInterests()</script>
+        <br /><br />
+        <button onclick="grabData()">Save Post</button>
+    </div>
+
+    

@@ -1,21 +1,30 @@
 <head>
     <link rel="stylesheet" type="text/css" href="10SecondCity.css" media="screen" />
     <script src="MainPage.js"></script>
+    <title>10 Second City</title>
 </head>
 
 <body>
-    <div, id="titleBar">
-        <button onclick="openPage('loginPage.html')">Login</button>
-    </div>
-    <div class="post", id='examplePost'>
+    <header>
+        <div, id="titleBar">
+            <button onclick="openPage('loginPage.html')">Login</button>
+            <button onclick="openPage('mainPage.html')">Home</button>
+            <button onclick="openPage('createPost.html')">New Post</button>
+        </div>
+    </header>
+
+    <div id="interestMenu" style="float: left; height:100%"></div>
+
+    <div class="post", id='examplePost' style="float: left">
     </div>
 
-    <template id='myTemplate'>
-        <div class='templatePost'></div>
+    <template id='myTemplate' width="500px">
+        <div class='templatePost' id="templatePost"></div>
     </template>
     
     <script>
         loadPosts();
+        interestButtons();
     </script>
 
 
